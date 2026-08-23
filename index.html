@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>GODFORGIVERANKONEDONT</title>
+<title>GODFORGIVERANKONEDONT — RANKONE NEVERLOSER</title>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}html,html,body{margin:0;min-height:100%;background:#080808;color:#eee;font-family:Kanit,sans-serif}body{position:relative;overflow-x:hidden}
@@ -51,9 +51,28 @@ body{overflow-x:hidden}.bg{position:fixed;inset:0;width:100vw;height:100vh;backg
 
 .directoryOpenToast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(12px);padding:9px 14px;border:1px solid #444;border-top:1px solid #fff;background:#111e;color:#aaa;font:9px Orbitron;letter-spacing:2px;opacity:0;pointer-events:none;z-index:9999;transition:.25s}
 .directoryOpenToast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.musicPlayer{position:fixed;right:18px;top:18px;z-index:9999;display:flex;align-items:center;gap:10px;max-width:min(430px,calc(100vw - 36px));padding:9px 11px;border:1px solid #333;border-top:2px solid #fff;border-radius:10px;background:#0c0c0ce8;backdrop-filter:blur(12px);box-shadow:0 14px 45px #0008}
+.musicBtn{border:1px solid #444;border-top:1px solid #fff;background:#151515;color:#eee;border-radius:7px;padding:8px 11px;font:9px Orbitron;letter-spacing:1px;cursor:pointer}
+.musicBtn:hover{background:#222;transform:translateY(-1px)}
+.musicInfo{min-width:0;display:flex;flex-direction:column;gap:3px}
+.musicTitle{font:9px Orbitron;color:#ddd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.musicTime{font:8px monospace;color:#666}
+.volume{width:70px;accent-color:#fff}
+@media(max-width:600px){.musicPlayer{left:12px;right:12px;top:12px;max-width:none}.musicTitle{max-width:130px}.volume{width:55px}}
 </style>
 </head>
 <body>
+<div class="musicPlayer" id="musicPlayer">
+  <audio id="audioPlayer" preload="auto"></audio>
+  <button class="musicBtn" id="musicToggle" type="button">♫ MUSIC</button>
+  <div class="musicInfo">
+    <span class="musicTitle" id="musicTitle">NO TRACK</span>
+    <span class="musicTime" id="musicTime">00:00 / 00:00</span>
+  </div>
+  <input id="musicVolume" class="volume" type="range" min="0" max="1" step="0.01" value="0.65" aria-label="Volume">
+</div>
+
 <div class="bg" id="bg"></div><div class="grid"></div><div class="ambient" id="ambient"></div><div class="cursorGlow" id="cursorGlow"></div>
 <button class="music" id="musicBtn">♫ MUSIC</button>
 
@@ -67,13 +86,13 @@ body{overflow-x:hidden}.bg{position:fixed;inset:0;width:100vw;height:100vh;backg
 <section class="landing" id="landing">
   <div class="hero">
     <div class="main-logo" id="mainLogo"><span>R</span></div>
-    <h1>Godforgiverankonedont</h1>
+    <h1>GODFORGIVERANKONEDONT</h1>
     <div class="sub"><i></i> RANKONE NEVERLOSER <i></i></div>
     <div class="entry">
-      <div class="crown"></div>
+      <div class="crown">♛</div>
       <h2>RANKONE</h2>
       <p>NEVER LOSE. NEVER FORGET.<br>WELCOME TO THE OFFICIAL MEMBER DIRECTORY.</p>
-      <button class="enter" id="enter">ENTER MEMBER RANKONE <span>↗</span></button>
+      <button class="enter" id="enter">ENTER MEMBER DIRECTORY <span>↗</span></button>
     </div>
   </div>
 </section>
@@ -85,7 +104,7 @@ body{overflow-x:hidden}.bg{position:fixed;inset:0;width:100vw;height:100vh;backg
  <div class="sec"><div class="sec-title"><h2>LEADERS</h2><small>/ <b id="lc">00</b></small></div><div id="leaders" class="cards"></div></div>
  <div class="sec"><div class="sec-title"><h2>MEMBERS</h2><small>/ <b id="mc">00</b></small></div><div id="members" class="cards"></div></div>
 </section>
-<div class="directoryOpenToast" id="directoryOpenToast">DIRECTORY LOADED</div><div class="bottom"><span>GODFORGIVERANKONEDONT</span><span>DESIGN BY RIDE RANKONE © 2026</span></div>
+<div class="directoryOpenToast" id="directoryOpenToast">DIRECTORY LOADED</div><div class="bottom"><span>GODFORGIVERANKONEDONT</span><span>RANKONE NEVERLOSER</span><span>© 2026</span></div>
 <div class="modal" id="modal"><div class="modalbox"><button class="close" id="close">×</button><div id="mAvatar" class="avatar"></div><div id="mRole" class="role"></div><h3 id="mName"></h3><a id="mFb" target="_blank">OPEN FACEBOOK ↗</a></div></div>
 <div id="yt" style="position:fixed;left:-10000px;bottom:0;width:1px;height:1px"></div>
 <script>
@@ -173,7 +192,7 @@ document.addEventListener("click",e=>{let c=e.target.closest(".card");if(!c)retu
 $("#close").onclick=()=>$("#modal").classList.remove("on");$("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("on")};
 let yt=localStorage.getItem("rankone_youtube");let player;
 function ytId(url){let m=(url||"").match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^?&/]+)/);return m?m[1]:""}
-function loadYT(){let id=ytId(yt);if(!id)return;$("#yt").innerHTML=`<iframe id="ytframe" width="1" height="1" src="https://www.youtube.com/embed/${id}?enablejsapi=1&loop=1&playlist=${id}&controls=0" allow="autoplay"></iframe>`}
+function loadYT(){let id=ytId(yt);if(!id)return;$("#yt").innerHTML=``}
 loadYT();
 const cg=$("#cursorGlow"); document.addEventListener("pointermove",e=>{cg.style.left=e.clientX+"px";cg.style.top=e.clientY+"px"});
 function playYT(){
@@ -223,6 +242,54 @@ document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerC
   mo.observe(document.body,{subtree:true,childList:true});
   window.addEventListener("load",()=>setTimeout(update,300));
   setInterval(update,1200);
+})();
+</script>
+
+<script>
+(function(){
+  const audio=document.getElementById("audioPlayer");
+  const toggle=document.getElementById("musicToggle");
+  const title=document.getElementById("musicTitle");
+  const time=document.getElementById("musicTime");
+  const volume=document.getElementById("musicVolume");
+  const KEY="rankone_music_playlist_v8";
+  const IDX="rankone_music_index_v8";
+  let playlist=[];
+  let current=0;
+
+  function fmt(s){
+    if(!isFinite(s)) return "00:00";
+    s=Math.max(0,Math.floor(s)); return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+  }
+  function load(){
+    try{playlist=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){playlist=[]}
+    current=Math.max(0,Math.min(Number(localStorage.getItem(IDX)||0),playlist.length-1));
+    if(playlist.length) setTrack(current,false);
+    else {title.textContent="NO TRACK";toggle.textContent="♫ MUSIC";}
+  }
+  function setTrack(i,autoplay){
+    if(!playlist.length)return;
+    current=(i+playlist.length)%playlist.length;
+    localStorage.setItem(IDX,current);
+    const t=playlist[current];
+    audio.src=t.src;
+    audio.load();
+    title.textContent=t.name||"RANKONE TRACK";
+    if(autoplay) audio.play().catch(()=>{});
+  }
+  toggle.addEventListener("click",()=>{
+    if(!playlist.length){alert("ยังไม่มีเพลง กรุณาเพิ่มเพลงใน Admin");return}
+    if(audio.paused) audio.play().catch(()=>{}); else audio.pause();
+  });
+  volume.addEventListener("input",()=>audio.volume=Number(volume.value));
+  audio.volume=.65;
+  audio.addEventListener("play",()=>toggle.textContent="Ⅱ PAUSE");
+  audio.addEventListener("pause",()=>toggle.textContent="♫ PLAY");
+  audio.addEventListener("ended",()=>setTrack(current+1,true));
+  audio.addEventListener("timeupdate",()=>time.textContent=fmt(audio.currentTime)+" / "+fmt(audio.duration));
+  function tryAuto(){if(playlist.length)audio.play().catch(()=>{});}
+  ["pointerdown","keydown","touchstart"].forEach(ev=>document.addEventListener(ev,tryAuto,{once:true,passive:true}));
+  load();
 })();
 </script>
 </body></html>

@@ -1,13 +1,19 @@
-RANKONE FINAL V7 — ENTER FIX
+RANKONE FINAL V8 — LOCAL MUSIC / NO ADS
 
-V6 มี JavaScript handler ซ้ำ/เหลือเศษคำสั่งเดิม ทำให้ browser parse script ไม่ผ่าน
-จึงทำให้ปุ่ม ENTER ไม่ทำงานทั้งเว็บ
+เปลี่ยนระบบเพลงจาก YouTube เป็น HTML5 Local Audio:
+- ไม่มีโฆษณาจาก YouTube
+- Admin เพิ่มเพลง MP3 / OGG / WAV
+- ตั้งชื่อเพลงได้
+- Playlist หลายเพลง
+- ลบเพลงได้
+- Clear Playlist ได้
+- เว็บเล่นเพลงจากไฟล์โดยตรง
+- ปุ่ม Play/Pause/Volume
+- เล่นเพลงถัดไปอัตโนมัติเมื่อเพลงจบ
+- พยายาม autoplay ตอนเปิดเว็บ และเริ่มเมื่อมี interaction แรกถ้า Browser บล็อก autoplay
 
-V7:
-- ลบ handler ที่ซ้ำและ syntax error
-- ใช้ event listener ชุดเดียวสำหรับ ENTER
-- รองรับ mouse click + Enter + Space
-- รองรับเปิดด้วย #members
-- Directory ถูกซ่อนตอนเริ่ม และแสดงทันทีเมื่อกด
-- คงขอบบนสีขาว ไม่มี RGB border
-- เพิ่มข้อความ DIRECTORY LOADED สั้น ๆ เพื่อยืนยันการเปิดหน้า
+ADMIN TOKEN: RANKONE-ADMIN-2026
+
+ข้อจำกัด:
+เพลงถูกเก็บใน localStorage ของ Browser ดังนั้นไฟล์ที่ใหญ่มากจะใช้พื้นที่สูง
+สำหรับใช้งานจริงหลายเครื่อง แนะนำเก็บเพลงบน hosting/CDN แล้วให้ Admin บันทึก URL ของไฟล์เพลงแทน
