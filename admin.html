@@ -5,23 +5,13 @@
 <div id="login" class="login"><h2>ADMIN ACCESS</h2><p class="hint">ใส่ Admin Token เพื่อเปิดเมนูจัดการ</p><div class="field"><label>ADMIN TOKEN</label><input id="token" type="password" placeholder="Enter token"></div><button class="btn" id="loginBtn">UNLOCK ADMIN</button><span id="loginMsg"></span></div>
 <div id="app" class="hidden">
 <div class="panel"><div class="tabs"><button class="active" data-tab="appearance">APPEARANCE</button><button data-tab="music">MUSIC</button><button data-tab="members">MEMBERS</button></div>
-
-<section id="musicLocal">
-  <h2>LOCAL MUSIC — ไม่มีโฆษณา</h2>
-  <p class="muted">อัปโหลดไฟล์ MP3 / OGG ที่คุณมีสิทธิ์ใช้งาน เพลงจะเล่นผ่าน HTML5 Audio โดยตรง</p>
-  <div class="field"><label>ชื่อเพลง</label><input id="trackName" placeholder="RANKONE TRACK 01"></div>
-  <div class="field"><label>เลือกไฟล์เพลง</label><input id="trackFile" type="file" accept="audio/mpeg,audio/ogg,audio/wav"></div>
-  <button class="btn" id="addTrack">ADD TO PLAYLIST</button>
-  <button class="btn dark" id="clearTracks">CLEAR PLAYLIST</button>
-  <div id="trackList" style="margin-top:18px"></div>
-</section>
 <section id="appearance"><h2>เว็บไซต์</h2>
 <div class="field"><label>MAIN LOGO — เลือกรูปโลโก้จากเครื่อง</label><input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp"></div>
 <div class="field"><label>หรือใช้ LOGO URL</label><input id="logoUrl" placeholder="https://.../logo.png"></div>
 <div id="logoPreview" class="preview"></div>
 <button class="btn" id="saveLogo">SAVE LOGO</button> <button class="btn dark" id="clearLogo">RESET LOGO</button><span id="logoMsg" class="saved"></span>
 <hr style="border-color:#222;margin:25px 0"><div class="field"><label>BACKGROUND IMAGE URL</label><input id="bgUrl" placeholder="https://.../background.jpg"></div><div class="field"><label>หรือเลือกไฟล์จากเครื่อง</label><input id="bgFile" type="file" accept="image/*"></div><div id="preview" class="preview"></div><button class="btn" id="saveBg">SAVE BACKGROUND</button> <button class="btn dark" id="clearBg">RESET BACKGROUND</button><span id="bgMsg" class="saved"></span><p class="hint">บันทึกใน browser เครื่องนี้ทันที หากต้องการให้ทุกคนเห็นเหมือนกัน ให้ใช้ URL รูปภาพออนไลน์เดียวกัน</p></section>
-
+<section id="music" class="hidden"><h2>YouTube Music</h2><div class="field"><label>YOUTUBE URL</label><input id="ytUrl" placeholder="https://www.youtube.com/watch?v=..."></div><button class="btn" id="saveMusic">SAVE YOUTUBE MUSIC</button><span id="ytMsg" class="saved"></span><p class="hint">ระบบจะพยายามเล่นอัตโนมัติเมื่อเปิดเว็บ และจะเริ่มทันทีเมื่อมีการคลิก/แตะครั้งแรกหาก Browser บล็อก autoplay (เป็นข้อจำกัดของ Browser ไม่ใช่ตัวเว็บ)</p></section>
 <section id="members" class="hidden"><div class="row"><div class="field"><label>NAME</label><input id="name"></div><div class="field"><label>ROLE</label><select id="role"><option>Founder</option><option>Leader</option><option>Member</option></select></div></div><div class="field"><label>FACEBOOK URL</label><input id="fb"></div><div class="field"><label>IMAGE URL</label><input id="img"></div><button class="btn" id="add">ADD MEMBER</button><span id="memberMsg" class="saved"></span><hr style="border-color:#222;margin:25px 0"><div id="list" class="members"></div></section>
 </div></div></div>
 <script>
@@ -69,133 +59,4 @@ function list(){let l=$("#list");l.innerHTML=members.map((m,i)=>`<div class="mem
 window.del=i=>{if(confirm("ลบสมาชิกนี้?")){members.splice(i,1);localStorage.setItem("rankone_members",JSON.stringify(members));list()}};
 $("#add").onclick=()=>{let name=$("#name").value.trim();if(!name)return alert("ใส่ชื่อก่อน");members.push({name,role:$("#role").value,facebook:$("#fb").value.trim()||"#",image:$("#img").value.trim()});localStorage.setItem("rankone_members",JSON.stringify(members));$("#name").value=$("#fb").value=$("#img").value="";$("#memberMsg").textContent=" ✓ SAVED";list();setTimeout(()=>$("#memberMsg").textContent="",1600)};
 list();
-</script>
-<script>
-(function(){
-  const KEY="rankone_music_playlist_v8";
-  const listEl=document.getElementById("trackList");
-  const fileEl=document.getElementById("trackFile");
-  const nameEl=document.getElementById("trackName");
-  const add=document.getElementById("addTrack");
-  const clear=document.getElementById("clearTracks");
-
-  if(!listEl || !fileEl || !add) return;
-
-  let list=[];
-  try {
-    const raw=localStorage.getItem(KEY);
-    list=raw?JSON.parse(raw):[];
-    if(!Array.isArray(list)) list=[];
-  } catch(e) {
-    list=[];
-  }
-
-  function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g,m=>({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-    }[m]));
-  }
-
-  function render(){
-    if(!list.length){
-      listEl.innerHTML='<div class="muted">ยังไม่มีเพลงใน Playlist</div>';
-      return;
-    }
-    listEl.innerHTML=list.map((x,i)=>`
-      <div class="trackRow" style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #292929;border-top:1px solid #fff;border-radius:8px;margin-bottom:8px;background:#111">
-        <span style="font:9px Orbitron;color:#888;width:24px">${String(i+1).padStart(2,"0")}</span>
-        <span style="flex:1;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(x.name)}</span>
-        <button type="button" class="btn dark" data-del="${i}">DELETE</button>
-      </div>`).join("");
-
-    listEl.querySelectorAll("[data-del]").forEach(btn=>{
-      btn.addEventListener("click",function(){
-        list.splice(Number(this.dataset.del),1);
-        save();
-      });
-    });
-  }
-
-  function save(){
-    try{
-      localStorage.setItem(KEY,JSON.stringify(list));
-      render();
-    }catch(e){
-      alert("บันทึกไม่ได้: พื้นที่ Browser เต็มแล้ว กรุณาลบเพลงเก่าหรือใช้ไฟล์ที่เล็กลง");
-    }
-  }
-
-  add.type="button";
-  add.addEventListener("click",function(ev){
-    ev.preventDefault();
-    ev.stopPropagation();
-
-    const f=fileEl.files && fileEl.files[0];
-    if(!f){
-      alert("กรุณาเลือกไฟล์เพลงก่อน");
-      return;
-    }
-
-    const allowed=["audio/mpeg","audio/ogg","audio/wav","audio/x-wav","audio/mp3"];
-    const ext=(f.name.split(".").pop()||"").toLowerCase();
-    if(!allowed.includes(f.type) && !["mp3","ogg","wav"].includes(ext)){
-      alert("รองรับเฉพาะ MP3 / OGG / WAV");
-      return;
-    }
-
-    // localStorage has a practical size limit; keep files modest.
-    if(f.size>4*1024*1024){
-      alert("ไฟล์ใหญ่เกิน 4MB สำหรับระบบ Local Playlist นี้ กรุณาใช้ไฟล์ที่เล็กลง");
-      return;
-    }
-
-    const reader=new FileReader();
-
-    reader.onerror=function(){
-      alert("อ่านไฟล์เพลงไม่สำเร็จ กรุณาลองเลือกไฟล์ใหม่");
-    };
-
-    reader.onload=function(){
-      const src=reader.result;
-      if(typeof src!=="string" || !src.startsWith("data:audio")){
-        alert("รูปแบบไฟล์เพลงไม่ถูกต้อง");
-        return;
-      }
-
-      list.push({
-        name:(nameEl.value||"").trim() || f.name,
-        src:src
-      });
-
-      try{
-        localStorage.setItem(KEY,JSON.stringify(list));
-        nameEl.value="";
-        fileEl.value="";
-        render();
-        alert("เพิ่มเพลงเข้า Playlist แล้ว ✓");
-      }catch(e){
-        list.pop();
-        alert("บันทึกไม่ได้: พื้นที่ Browser ไม่พอ กรุณาใช้เพลงที่เล็กลงหรือลบเพลงเก่า");
-      }
-    };
-
-    reader.readAsDataURL(f);
-  });
-
-  if(clear){
-    clear.type="button";
-    clear.addEventListener("click",function(ev){
-      ev.preventDefault();
-      if(!list.length) return;
-      if(confirm("ล้าง Playlist ทั้งหมด?")){
-        list=[];
-        localStorage.removeItem(KEY);
-        render();
-      }
-    });
-  }
-
-  render();
-})();
-</script>
-</body></html>
+</script></body></html>

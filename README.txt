@@ -1,13 +1,13 @@
-RANKONE FINAL V9 — MUSIC ADD FIX
+RANKONE FINAL V7 — ENTER FIX
 
-แก้ปุ่ม ADD TO PLAYLIST:
-- ปุ่มเป็น type=button ไม่ submit ฟอร์ม
-- อ่านไฟล์ MP3 / OGG / WAV ได้
-- รองรับ MIME type หลายแบบ
-- ตรวจนามสกุลไฟล์
-- ตรวจขนาดไฟล์ก่อนอ่าน
-- FileReader มี error handling
-- ตรวจการบันทึก localStorage
-- แสดงข้อความเมื่อเพิ่มเพลงสำเร็จ
-- DELETE และ CLEAR ทำงานแยกจาก form
-- ป้องกันปุ่มถูก form submit/reload หน้า
+V6 มี JavaScript handler ซ้ำ/เหลือเศษคำสั่งเดิม ทำให้ browser parse script ไม่ผ่าน
+จึงทำให้ปุ่ม ENTER ไม่ทำงานทั้งเว็บ
+
+V7:
+- ลบ handler ที่ซ้ำและ syntax error
+- ใช้ event listener ชุดเดียวสำหรับ ENTER
+- รองรับ mouse click + Enter + Space
+- รองรับเปิดด้วย #members
+- Directory ถูกซ่อนตอนเริ่ม และแสดงทันทีเมื่อกด
+- คงขอบบนสีขาว ไม่มี RGB border
+- เพิ่มข้อความ DIRECTORY LOADED สั้น ๆ เพื่อยืนยันการเปิดหน้า
