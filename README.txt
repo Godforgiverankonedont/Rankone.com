@@ -1,18 +1,15 @@
-RANKONE FINAL V3
+RANKONE FINAL V4
 
-ADMIN TOKEN: RANKONE-ADMIN-2026
-ADMIN: /admin.html
-หรือ Ctrl+Shift+A
-
-เพิ่มใน V3:
-- RGB animated border รอบกล่อง Main
-- RGB/Light sweep effect
-- Mouse glow
-- Ambient moving particles
-- Card hover lift + glow
-- พยายาม autoplay YouTube ตอนเปิดหน้า
-- ถ้า Browser บล็อก autoplay จะเริ่มทันทีเมื่อผู้ใช้คลิก/แตะ/กดคีย์ครั้งแรก
+เพิ่ม:
+- Dashboard สถานะ TOTAL / FOUNDERS / LEADERS / MEMBERS
+- นับจำนวนรายชื่อแบบ live
+- สีแยกหมวด:
+  Founder = ทอง
+  Leader = แดง
+  Member = น้ำเงิน/ฟ้า
+- Role badge บนการ์ด
+- Glow + เส้นขอบ + sweep effect แยกตามหมวด
+- จำนวนในหัวข้อแต่ละหมวดอัปเดตตามรายชื่อ
 
 หมายเหตุ:
-Chrome/Edge และ Browser ส่วนใหญ่สามารถบล็อกเสียง autoplay ที่ไม่ได้เกิดจากการโต้ตอบของผู้ใช้ได้
-จึงไม่สามารถรับประกันการ autoplay พร้อมเสียง 100% ด้วย JavaScript เพียงอย่างเดียว
+จำนวนจะนับจากรายชื่อที่แสดงอยู่บนหน้า และอัปเดตเมื่อข้อมูลถูกเพิ่ม/โหลด/กรอง

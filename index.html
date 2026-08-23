@@ -16,12 +16,51 @@ body{overflow-x:hidden}.bg{position:fixed;inset:0;background:#111 center/cover n
 .enter span{margin-left:12px}.bottom{position:fixed;left:30px;right:30px;bottom:22px;display:flex;justify-content:space-between;color:#555;font:8px Orbitron;letter-spacing:2px}.music{position:fixed;right:25px;top:22px;border:1px solid #333;background:#111a;color:#999;padding:10px 14px;border-radius:20px;font:8px Orbitron;cursor:pointer}
 .directory{display:none;max-width:1200px;margin:auto;padding:55px 24px 80px}.directory.show{display:block}.dir-head{text-align:center;margin-bottom:35px}.main-logo.small{width:64px;height:64px;margin-bottom:15px}.dir-head h1{font:800 clamp(32px,5vw,65px) Orbitron;margin:0}.dir-head p{font:9px Orbitron;color:#666;letter-spacing:5px}.entry:before{content:"";position:absolute;inset:-1px;border-radius:20px;padding:1px;background:conic-gradient(from 0deg,#ff004c,#ff8a00,#fff000,#00ff88,#00d9ff,#7a5cff,#ff00c8,#ff004c);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;filter:blur(.2px);pointer-events:none}.entry:after{content:"";position:absolute;inset:0;border-radius:20px;background:linear-gradient(120deg,transparent 25%,#fff1 45%,transparent 60%);transform:translateX(-120%);animation:sweep 6s ease-in-out infinite;pointer-events:none}.tools{display:flex;gap:8px;justify-content:flex-end;margin-bottom:22px}.tools input,.tools select{background:#101010;color:#ddd;border:1px solid #303030;padding:12px;font-family:inherit}.tools input{width:260px}.sec{margin:40px 0}.sec-title{display:flex;align-items:baseline;gap:8px;margin-bottom:14px}.sec-title h2{font:700 25px Orbitron;margin:0}.sec-title small{color:#555;font:9px Orbitron}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.founders{grid-template-columns:repeat(2,1fr);max-width:780px;margin:auto}.card{position:relative;display:flex;align-items:center;gap:14px;min-height:96px;padding:14px 18px;border:1px solid transparent;border-radius:10px;background:linear-gradient(110deg,#181818,#0d0d0d) padding-box,linear-gradient(90deg,#333,#111,#444) border-box;overflow:hidden;cursor:pointer;transition:.25s}.card:hover{transform:translateY(-5px) scale(1.008);border-color:transparent;box-shadow:0 18px 45px #000,0 0 0 1px #ffffff33,0 0 28px #ffffff12;box-shadow:0 18px 45px #000}.card:after{content:"";position:absolute;top:0;bottom:0;width:100px;background:linear-gradient(90deg,transparent,#fff1,transparent);transform:translateX(-150px) skewX(-20deg);transition:.7s}.card:hover:after{transform:translateX(500px) skewX(-20deg)}.avatar{width:52px;height:52px;min-width:52px;border-radius:50%;border:1px solid #555;background:#222;display:grid;place-items:center;overflow:hidden;font:700 12px Orbitron}.avatar img{width:100%;height:100%;object-fit:cover}.role{font:8px Orbitron;color:#777;letter-spacing:1px}.card h3{font-size:16px;font-weight:500;margin:5px 0}.fb{color:#777;text-decoration:none;font:8px Orbitron}.live{margin-left:auto;width:5px;height:5px;background:#aaa;border-radius:50%;box-shadow:0 0 12px #fff}.modal{display:none;position:fixed;inset:0;background:#000b;backdrop-filter:blur(8px);z-index:10;place-items:center}.modal.on{display:grid}.modalbox{width:min(420px,90vw);padding:35px;background:#111;border:1px solid #444;border-radius:15px;text-align:center;position:relative}.close{position:absolute;right:15px;top:7px;background:none;border:0;color:#888;font-size:26px}.modalbox .avatar{margin:auto;width:100px;height:100px}.modalbox h3{font:700 23px Orbitron}.modalbox a{display:block;background:#eee;color:#111;padding:12px;text-decoration:none;font:700 9px Orbitron}
 @keyframes drift{from{transform:translate3d(0,0,0)}50%{transform:translate3d(18px,-24px,0)}to{transform:translate3d(0,0,0)}}@keyframes rgbBorder{0%{background-position:0 0,0% 50%}50%{background-position:0 0,100% 50%}100%{background-position:0 0,0% 50%}}@keyframes sweep{0%,55%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@media(max-width:800px){.cards,.founders{grid-template-columns:1fr}.tools{justify-content:stretch;flex-wrap:wrap}.tools input{flex:1;width:auto}.bottom{display:none}}
+
+/* ===== RANKONE V4 DIRECTORY STATUS + CATEGORY FX ===== */
+.statusBar{width:min(1120px,92vw);margin:0 auto 28px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.stat{position:relative;padding:14px 16px;border:1px solid #2a2a2a;border-radius:12px;background:#111c;backdrop-filter:blur(12px);overflow:hidden}
+.stat:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 20%,#fff1 48%,transparent 72%);transform:translateX(-120%);animation:statSweep 7s ease-in-out infinite}
+.stat .num{display:block;font:800 24px Orbitron, sans-serif;color:#eee}
+.stat .label{display:block;margin-top:4px;font-size:10px;letter-spacing:2px;color:#777}
+.stat.total{border-color:#555;box-shadow:0 0 24px #fff08}
+.stat.founder{border-color:#b08a22;box-shadow:0 0 22px #ffcc3310}
+.stat.leader{border-color:#a73535;box-shadow:0 0 22px #ff334410}
+.stat.member{border-color:#3b6fa8;box-shadow:0 0 22px #3388ff10}
+.sectionTitle{display:flex;align-items:center;gap:12px}
+.sectionTitle .count{font-size:11px;letter-spacing:2px;color:#777}
+.sectionTitle .dot{width:7px;height:7px;border-radius:50%;animation:pulseDot 1.8s infinite}
+.sectionTitle.founder .dot{background:#e6b72d;box-shadow:0 0 14px #e6b72d}
+.sectionTitle.leader .dot{background:#e33;box-shadow:0 0 14px #e33}
+.sectionTitle.member .dot{background:#4aa3ff;box-shadow:0 0 14px #4aa3ff}
+.card.founder{border-color:#6d5515;background:linear-gradient(110deg,#18160f,#0d0d0d) padding-box,linear-gradient(90deg,#6d5515,#2b2208,#b38b22) border-box}
+.card.leader{border-color:#672020;background:linear-gradient(110deg,#191010,#0d0d0d) padding-box,linear-gradient(90deg,#6b2222,#281010,#c83a3a) border-box}
+.card.member{border-color:#203f61;background:linear-gradient(110deg,#10151b,#0d0d0d) padding-box,linear-gradient(90deg,#254d76,#101f30,#4b8dcb) border-box}
+.card.founder:before,.card.leader:before,.card.member:before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:2px;border-radius:5px;opacity:.9}
+.card.founder:before{background:#e6b72d;box-shadow:0 0 12px #e6b72d}
+.card.leader:before{background:#e33;box-shadow:0 0 12px #e33}
+.card.member:before{background:#4aa3ff;box-shadow:0 0 12px #4aa3ff}
+.card .roleBadge{margin-left:auto;padding:4px 8px;border-radius:99px;font-size:8px;letter-spacing:1.5px;background:#fff08;border:1px solid #444;color:#999}
+.card.founder .roleBadge{color:#e6b72d;border-color:#6d5515}
+.card.leader .roleBadge{color:#e33;border-color:#672020}
+.card.member .roleBadge{color:#4aa3ff;border-color:#203f61}
+.emptyState{padding:34px;text-align:center;color:#666;border:1px dashed #333;border-radius:14px}
+@keyframes statSweep{0%,55%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}
+@keyframes pulseDot{0%,100%{opacity:.45;transform:scale(.85)}50%{opacity:1;transform:scale(1.2)}}
+@media(max-width:720px){.statusBar{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
 <div class="bg" id="bg"></div><div class="grid"></div><div class="ambient" id="ambient"></div><div class="cursorGlow" id="cursorGlow"></div>
 <button class="music" id="musicBtn">♫ MUSIC</button>
 
+
+<div class="statusBar" id="statusBar">
+  <div class="stat total"><span class="num" id="statTotal">0</span><span class="label">TOTAL MEMBERS</span></div>
+  <div class="stat founder"><span class="num" id="statFounder">0</span><span class="label">FOUNDERS</span></div>
+  <div class="stat leader"><span class="num" id="statLeader">0</span><span class="label">LEADERS</span></div>
+  <div class="stat member"><span class="num" id="statMember">0</span><span class="label">MEMBERS</span></div>
+</div>
 <section class="landing" id="landing">
   <div class="hero">
     <div class="main-logo" id="mainLogo"><span>R</span></div>
@@ -92,5 +131,44 @@ window.addEventListener("load",()=>{setTimeout(()=>playYT(),900)});
 ["pointerdown","keydown","touchstart"].forEach(ev=>document.addEventListener(ev,()=>playYT(),{once:true,passive:true}));
 $("#musicBtn").onclick=()=>{let f=$("#ytframe");if(!f){alert("ยังไม่ได้ตั้งเพลง YouTube ใน Admin");return}f.contentWindow.postMessage(JSON.stringify({event:"command",func:"playVideo",args:[]}),"*");$("#musicBtn").textContent="♫ PLAYING"};
 document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="a"){e.preventDefault();location.href="admin.html"}});
+</script>
+
+<script>
+/* V4 live directory status + category visual enhancer */
+(function(){
+  const q=s=>document.querySelector(s);
+  const qa=s=>Array.from(document.querySelectorAll(s));
+  function norm(v){return String(v||"").trim().toLowerCase()}
+  function classify(card){
+    const t=norm(card.textContent);
+    let role="member";
+    if(t.includes("founder")) role="founder";
+    else if(t.includes("leader")) role="leader";
+    card.classList.remove("founder","leader","member");
+    card.classList.add(role);
+    if(!card.querySelector(".roleBadge")){
+      const b=document.createElement("span"); b.className="roleBadge"; b.textContent=role.toUpperCase();
+      card.appendChild(b);
+    }
+    return role;
+  }
+  function update(){
+    const cards=qa(".card");
+    let f=0,l=0,m=0;
+    cards.forEach(c=>{const r=classify(c); if(r==="founder")f++;else if(r==="leader")l++;else m++;});
+    const sf=q("#statFounder"),sl=q("#statLeader"),sm=q("#statMember"),st=q("#statTotal");
+    if(sf)sf.textContent=f;if(sl)sl.textContent=l;if(sm)sm.textContent=m;if(st)st.textContent=f+l+m;
+    qa(".sectionTitle").forEach(s=>{
+      const tx=norm(s.textContent); let r=tx.includes("founder")?"founder":tx.includes("leader")?"leader":"member";
+      s.classList.add(r);
+      let c=s.querySelector(".count"); if(!c){c=document.createElement("span");c.className="count";s.appendChild(c)}
+      const n=r==="founder"?f:r==="leader"?l:m;c.textContent=`/ ${String(n).padStart(2,"0")}`;
+    });
+  }
+  const mo=new MutationObserver(()=>setTimeout(update,60));
+  mo.observe(document.body,{subtree:true,childList:true});
+  window.addEventListener("load",()=>setTimeout(update,300));
+  setInterval(update,1200);
+})();
 </script>
 </body></html>
