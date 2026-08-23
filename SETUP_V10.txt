@@ -1,0 +1,20 @@
+RANKONE V10 — ONLINE
+
+1. สร้าง Supabase project ฟรี
+2. SQL Editor -> Run เนื้อหา supabase_setup.sql
+3. Storage -> New bucket -> ชื่อ rankone-media -> Public ON
+4. Project Settings -> API -> คัดลอก Project URL และ anon public key
+5. แก้ supabase-config.js:
+   url = Project URL
+   anonKey = anon public key
+6. อัปโหลดไฟล์ทั้งหมดขึ้น GitHub Pages
+
+ผลลัพธ์:
+- ผู้ชมทุกเครื่องอ่าน Background/Logo/Members/Tracks จากฐานข้อมูลเดียวกัน
+- เพลงไม่ใช้ YouTube จึงไม่มีโฆษณา
+- Admin เพิ่มเพลงเข้า Storage กลาง
+
+สำคัญ:
+adminToken ในไฟล์ JS เป็นเพียงตัวกันหน้า Admin แบบเบื้องต้น ไม่ใช่ authentication จริง
+ห้ามใส่ service_role key ในเว็บ
+สำหรับ production ควรใช้ Supabase Auth + RLS หรือ Edge Function สำหรับการเขียนข้อมูล
