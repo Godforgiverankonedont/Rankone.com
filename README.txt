@@ -1,15 +1,10 @@
-RANKONE FINAL V4
+RANKONE FINAL V5 — BACKGROUND FIX
 
-เพิ่ม:
-- Dashboard สถานะ TOTAL / FOUNDERS / LEADERS / MEMBERS
-- นับจำนวนรายชื่อแบบ live
-- สีแยกหมวด:
-  Founder = ทอง
-  Leader = แดง
-  Member = น้ำเงิน/ฟ้า
-- Role badge บนการ์ด
-- Glow + เส้นขอบ + sweep effect แยกตามหมวด
-- จำนวนในหัวข้อแต่ละหมวดอัปเดตตามรายชื่อ
-
-หมายเหตุ:
-จำนวนจะนับจากรายชื่อที่แสดงอยู่บนหน้า และอัปเดตเมื่อข้อมูลถูกเพิ่ม/โหลด/กรอง
+แก้ปัญหาพื้นหลังแสดงไม่เต็ม/เหมือนโหลดมาแค่บางส่วน:
+- Background เป็น fixed 100vw x 100vh
+- ใช้ background-size: cover + center center
+- แก้ z-index ไม่ให้พื้นหลังถูก body/background layer ทับ
+- Overlay ถูกลดความเข้มเพื่อให้เห็นภาพมากขึ้น
+- เอฟเฟกต์ grid/particles ยังอยู่แต่ไม่บังภาพ
+- Dashboard จำนวนรายชื่อจะซ่อนตอนหน้า Main และแสดงเมื่อเข้า Directory
+- รองรับทั้งรูปจาก URL และ data URL จากไฟล์ที่ Admin เลือก
