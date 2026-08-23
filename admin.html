@@ -78,26 +78,123 @@ list();
   const nameEl=document.getElementById("trackName");
   const add=document.getElementById("addTrack");
   const clear=document.getElementById("clearTracks");
-  if(!listEl||!fileEl||!add)return;
-  let list=[];
-  try{list=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){list=[]}
 
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(list));render()}catch(e){alert("พื้นที่ Browser ไม่พอ — แนะนำให้ใช้ไฟล์สั้น/ขนาดเล็กกว่าเดิม")}}
-  function render(){
-    if(!list.length){listEl.innerHTML='<div class="muted">ยังไม่มีเพลงใน Playlist</div>';return}
-    listEl.innerHTML=list.map((x,i)=>`<div class="trackRow" style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #292929;border-top:1px solid #fff;border-radius:8px;margin-bottom:8px;background:#111"><span style="font:9px Orbitron;color:#888;width:24px">${String(i+1).padStart(2,"0")}</span><span style="flex:1;font-size:12px">${escapeHtml(x.name)}</span><button class="btn dark" data-del="${i}">DELETE</button></div>`).join("");
-    listEl.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{list.splice(Number(b.dataset.del),1);save()});
+  if(!listEl || !fileEl || !add) return;
+
+  let list=[];
+  try {
+    const raw=localStorage.getItem(KEY);
+    list=raw?JSON.parse(raw):[];
+    if(!Array.isArray(list)) list=[];
+  } catch(e) {
+    list=[];
   }
-  function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-  add.onclick=()=>{
-    const f=fileEl.files[0]; if(!f){alert("เลือกไฟล์เพลงก่อน");return}
-    if(!/^audio\\/(mpeg|ogg|wav)$/.test(f.type)){alert("รองรับ MP3 / OGG / WAV");return}
-    if(f.size>5*1024*1024){alert("ไฟล์ใหญ่เกิน 5MB สำหรับระบบ Local Storage");return}
-    const r=new FileReader();
-    r.onload=()=>{list.push({name:nameEl.value.trim()||f.name,src:r.result});nameEl.value="";fileEl.value="";save()};
-    r.readAsDataURL(f);
-  };
-  clear.onclick=()=>{if(confirm("ล้าง Playlist ทั้งหมด?")){list=[];save()}};
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g,m=>({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[m]));
+  }
+
+  function render(){
+    if(!list.length){
+      listEl.innerHTML='<div class="muted">ยังไม่มีเพลงใน Playlist</div>';
+      return;
+    }
+    listEl.innerHTML=list.map((x,i)=>`
+      <div class="trackRow" style="display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #292929;border-top:1px solid #fff;border-radius:8px;margin-bottom:8px;background:#111">
+        <span style="font:9px Orbitron;color:#888;width:24px">${String(i+1).padStart(2,"0")}</span>
+        <span style="flex:1;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${escapeHtml(x.name)}</span>
+        <button type="button" class="btn dark" data-del="${i}">DELETE</button>
+      </div>`).join("");
+
+    listEl.querySelectorAll("[data-del]").forEach(btn=>{
+      btn.addEventListener("click",function(){
+        list.splice(Number(this.dataset.del),1);
+        save();
+      });
+    });
+  }
+
+  function save(){
+    try{
+      localStorage.setItem(KEY,JSON.stringify(list));
+      render();
+    }catch(e){
+      alert("บันทึกไม่ได้: พื้นที่ Browser เต็มแล้ว กรุณาลบเพลงเก่าหรือใช้ไฟล์ที่เล็กลง");
+    }
+  }
+
+  add.type="button";
+  add.addEventListener("click",function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+
+    const f=fileEl.files && fileEl.files[0];
+    if(!f){
+      alert("กรุณาเลือกไฟล์เพลงก่อน");
+      return;
+    }
+
+    const allowed=["audio/mpeg","audio/ogg","audio/wav","audio/x-wav","audio/mp3"];
+    const ext=(f.name.split(".").pop()||"").toLowerCase();
+    if(!allowed.includes(f.type) && !["mp3","ogg","wav"].includes(ext)){
+      alert("รองรับเฉพาะ MP3 / OGG / WAV");
+      return;
+    }
+
+    // localStorage has a practical size limit; keep files modest.
+    if(f.size>4*1024*1024){
+      alert("ไฟล์ใหญ่เกิน 4MB สำหรับระบบ Local Playlist นี้ กรุณาใช้ไฟล์ที่เล็กลง");
+      return;
+    }
+
+    const reader=new FileReader();
+
+    reader.onerror=function(){
+      alert("อ่านไฟล์เพลงไม่สำเร็จ กรุณาลองเลือกไฟล์ใหม่");
+    };
+
+    reader.onload=function(){
+      const src=reader.result;
+      if(typeof src!=="string" || !src.startsWith("data:audio")){
+        alert("รูปแบบไฟล์เพลงไม่ถูกต้อง");
+        return;
+      }
+
+      list.push({
+        name:(nameEl.value||"").trim() || f.name,
+        src:src
+      });
+
+      try{
+        localStorage.setItem(KEY,JSON.stringify(list));
+        nameEl.value="";
+        fileEl.value="";
+        render();
+        alert("เพิ่มเพลงเข้า Playlist แล้ว ✓");
+      }catch(e){
+        list.pop();
+        alert("บันทึกไม่ได้: พื้นที่ Browser ไม่พอ กรุณาใช้เพลงที่เล็กลงหรือลบเพลงเก่า");
+      }
+    };
+
+    reader.readAsDataURL(f);
+  });
+
+  if(clear){
+    clear.type="button";
+    clear.addEventListener("click",function(ev){
+      ev.preventDefault();
+      if(!list.length) return;
+      if(confirm("ล้าง Playlist ทั้งหมด?")){
+        list=[];
+        localStorage.removeItem(KEY);
+        render();
+      }
+    });
+  }
+
   render();
 })();
 </script>
