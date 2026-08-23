@@ -1,15 +1,6 @@
 const DEFAULT_TOKEN="RANKONE-ADMIN-2026";
 const defaultMembers=[
 {name:"Thomas Winterfell",role:"Founder",facebook:"#",active:true,image:""},
-{name:"Paul Winterfell",role:"Founder",facebook:"#",active:true,image:""},
-{name:"Awake Prime",role:"Founder",facebook:"#",active:true,image:""},
-{name:"MeudMon Winterfell",role:"Founder",facebook:"#",active:true,image:""},
-{name:"JabGas Winterfell",role:"Founder",facebook:"#",active:true,image:""},
-{name:"Nelro Winterfell",role:"Leader",facebook:"#",active:true,image:""},
-{name:"Turk Godyouknow",role:"Leader",facebook:"#",active:true,image:""},
-{name:"Rankone Member 01",role:"Member",facebook:"#",active:true,image:""},
-{name:"Rankone Member 02",role:"Member",facebook:"#",active:true,image:""},
-{name:"Rankone Member 03",role:"Member",facebook:"#",active:true,image:""}];
 const $=s=>document.querySelector(s);
 let members=JSON.parse(localStorage.getItem("rankone_members")||JSON.stringify(defaultMembers));
 const save=()=>localStorage.setItem("rankone_members",JSON.stringify(members));
