@@ -1,18 +1,18 @@
-RANKONE FINAL V2
+RANKONE FINAL V3
 
 ADMIN TOKEN: RANKONE-ADMIN-2026
 ADMIN: /admin.html
-หรือหน้าเว็บกด Ctrl+Shift+A
+หรือ Ctrl+Shift+A
 
-V2 แก้ไข:
-- เพิ่ม MAIN LOGO เลือกไฟล์จากเครื่องหรือ URL
-- Logo แสดงทั้งหน้า Landing และ Directory
-- Background เลือกไฟล์จากเครื่องหรือ URL
-- Preview ก่อน Save
-- Reset Background / Logo
-- จำกัดขนาดไฟล์เพื่อไม่ให้ localStorage เต็ม
-- ใช้ localStorage เดิม จึงเห็นค่าบน browser เดียวกันทันที
+เพิ่มใน V3:
+- RGB animated border รอบกล่อง Main
+- RGB/Light sweep effect
+- Mouse glow
+- Ambient moving particles
+- Card hover lift + glow
+- พยายาม autoplay YouTube ตอนเปิดหน้า
+- ถ้า Browser บล็อก autoplay จะเริ่มทันทีเมื่อผู้ใช้คลิก/แตะ/กดคีย์ครั้งแรก
 
-สำคัญ:
-GitHub Pages เป็น Static Hosting ระบบนี้จึงเก็บค่าบน browser เครื่องที่ Admin แก้
-ถ้าต้องการให้ทุกเครื่องทั่วโลกเห็นค่าที่ Admin Save เหมือนกัน ต้องเชื่อมฐานข้อมูล/Backend
+หมายเหตุ:
+Chrome/Edge และ Browser ส่วนใหญ่สามารถบล็อกเสียง autoplay ที่ไม่ได้เกิดจากการโต้ตอบของผู้ใช้ได้
+จึงไม่สามารถรับประกันการ autoplay พร้อมเสียง 100% ด้วย JavaScript เพียงอย่างเดียว
