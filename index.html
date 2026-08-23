@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Godforgiverankonedont — RANKONE NEVERLOSER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="backdrop" id="backdrop"></div><div class="texture"></div><div class="grain"></div>
+<header class="header">
+  <div class="title-block">
+    <h1>GODFORGIVERANKONEDONT</h1>
+    <div class="subtitle"><span></span> RANKONE NEVERLOSER <span></span></div>
+  </div>
+  <div class="header-tools">
+    <button id="musicBtn" class="mini-btn">♫ MUSIC</button>
+    <label class="search"><span>⌕</span><input id="search" placeholder="SEARCH MEMBERS..."></label>
+    <select id="filter"><option value="all">ALL</option><option>Founder</option><option>Leader</option><option>Member</option></select>
+  </div>
+</header>
+
+<main>
+  <div class="announcement"><span class="pulse"></span> RANKONE MEMBER DATABASE <i>LIVE</i></div>
+
+  <section class="member-section" id="founderSection">
+    <div class="section-heading"><h2>FOUNDERS</h2><span>/ <b id="founderCount">00</b></span></div>
+    <div id="founders" class="member-grid founder-grid"></div>
+  </section>
+
+  <section class="member-section" id="leaderSection">
+    <div class="section-heading"><h2>LEADERS</h2><span>/ <b id="leaderCount">00</b></span></div>
+    <div id="leaders" class="member-grid"></div>
+  </section>
+
+  <section class="member-section" id="memberSection">
+    <div class="section-heading"><h2>MEMBERS</h2><span>/ <b id="memberCount">00</b></span></div>
+    <div id="members" class="member-grid"></div>
+  </section>
+
+  <div id="empty" class="empty" hidden>NO MEMBER FOUND</div>
+</main>
+
+<footer><span>GODFORGIVERANKONEDONT</span><b>RANKONE NEVERLOSER</b><span>© 2026</span></footer>
+
+<div id="profileModal" class="modal">
+ <div class="profile-card">
+  <button id="closeModal">×</button>
+  <div class="profile-photo-wrap"><div id="profileInitial" class="profile-initial">R1</div><img id="profilePhoto"></div>
+  <div id="profileRole" class="profile-role"></div>
+  <h3 id="profileName"></h3>
+  <p>VERIFIED MEMBER / RANKONE NETWORK</p>
+  <a id="profileFb" href="#" target="_blank">OPEN FACEBOOK ↗</a>
+ </div>
+</div>
+
+<audio id="audio" loop></audio>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RANKONE CONTROL ROOM</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;background:#090909;color:#eee;font-family:Kanit}.wrap{max-width:1100px;margin:auto;padding:35px 20px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #292929;padding-bottom:22px}.top h1{font:800 22px Orbitron;margin:0}.top a{color:#aaa;text-decoration:none}.login,.panel{background:#111;border:1px solid #303030;border-radius:12px;padding:28px;margin:25px 0}.login{max-width:440px;margin:100px auto}.login h2{font:700 18px Orbitron}.field{margin:14px 0}.field label{display:block;color:#777;font-size:12px;margin-bottom:7px}.field input,.field select{width:100%;padding:12px;background:#080808;border:1px solid #333;color:#eee;border-radius:6px}.btn{padding:11px 17px;border:1px solid #555;background:#eee;color:#111;border-radius:5px;font:700 10px Orbitron;cursor:pointer}.btn.dark{background:#151515;color:#bbb;border-color:#333}.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.members{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.member{display:flex;gap:10px;align-items:center;background:#0b0b0b;border:1px solid #252525;padding:10px;border-radius:7px}.member .ava{width:42px;height:42px;border-radius:50%;overflow:hidden;background:#222;display:grid;place-items:center;font:10px Orbitron}.ava img{width:100%;height:100%;object-fit:cover}.member .grow{flex:1}.member b{font-size:13px}.member small{display:block;color:#666}.member button{border:1px solid #333;background:#151515;color:#aaa;padding:7px;cursor:pointer}.saved{color:#999;font-size:11px;margin-left:10px}.hidden{display:none!important}.hint{color:#666;font-size:11px;line-height:1.7}.preview{height:150px;border-radius:8px;border:1px solid #333;background:#181818 center/cover no-repeat;margin-top:10px}.ytok{color:#888;font-size:11px}.tabs{display:flex;gap:7px;margin-bottom:15px}.tabs button{padding:9px 12px;background:#111;color:#888;border:1px solid #292929;cursor:pointer}.tabs button.active{background:#eee;color:#111}@media(max-width:700px){.row,.members{grid-template-columns:1fr}.top{gap:15px;align-items:flex-start;flex-direction:column}}</style></head><body>
+<div class="wrap"><div class="top"><h1>RANKONE / CONTROL ROOM</h1><a href="index.html">← BACK TO SITE</a></div>
+<div id="login" class="login"><h2>ADMIN ACCESS</h2><p class="hint">ใส่ Admin Token เพื่อเปิดเมนูจัดการ</p><div class="field"><label>ADMIN TOKEN</label><input id="token" type="password" placeholder="Enter token"></div><button class="btn" id="loginBtn">UNLOCK ADMIN</button><span id="loginMsg"></span></div>
+<div id="app" class="hidden">
+<div class="panel"><div class="tabs"><button class="active" data-tab="appearance">APPEARANCE</button><button data-tab="music">MUSIC</button><button data-tab="members">MEMBERS</button></div>
+<section id="appearance"><h2>เว็บไซต์</h2>
+<div class="field"><label>MAIN LOGO — เลือกรูปโลโก้จากเครื่อง</label><input id="logoFile" type="file" accept="image/png,image/jpeg,image/webp"></div>
+<div class="field"><label>หรือใช้ LOGO URL</label><input id="logoUrl" placeholder="https://.../logo.png"></div>
+<div id="logoPreview" class="preview"></div>
+<button class="btn" id="saveLogo">SAVE LOGO</button> <button class="btn dark" id="clearLogo">RESET LOGO</button><span id="logoMsg" class="saved"></span>
+<hr style="border-color:#222;margin:25px 0"><div class="field"><label>BACKGROUND IMAGE URL</label><input id="bgUrl" placeholder="https://.../background.jpg"></div><div class="field"><label>หรือเลือกไฟล์จากเครื่อง</label><input id="bgFile" type="file" accept="image/*"></div><div id="preview" class="preview"></div><button class="btn" id="saveBg">SAVE BACKGROUND</button> <button class="btn dark" id="clearBg">RESET BACKGROUND</button><span id="bgMsg" class="saved"></span><p class="hint">บันทึกใน browser เครื่องนี้ทันที หากต้องการให้ทุกคนเห็นเหมือนกัน ให้ใช้ URL รูปภาพออนไลน์เดียวกัน</p></section>
+<section id="music" class="hidden"><h2>YouTube Music</h2><div class="field"><label>YOUTUBE URL</label><input id="ytUrl" placeholder="https://www.youtube.com/watch?v=..."></div><button class="btn" id="saveMusic">SAVE YOUTUBE MUSIC</button><span id="ytMsg" class="saved"></span><p class="hint">ระบบจะใช้เฉพาะ Video ID จาก YouTube และเล่นเมื่อผู้ใช้กดปุ่ม MUSIC เพื่อให้สอดคล้องกับข้อจำกัด autoplay ของ browser</p></section>
+<section id="members" class="hidden"><div class="row"><div class="field"><label>NAME</label><input id="name"></div><div class="field"><label>ROLE</label><select id="role"><option>Founder</option><option>Leader</option><option>Member</option></select></div></div><div class="field"><label>FACEBOOK URL</label><input id="fb"></div><div class="field"><label>IMAGE URL</label><input id="img"></div><button class="btn" id="add">ADD MEMBER</button><span id="memberMsg" class="saved"></span><hr style="border-color:#222;margin:25px 0"><div id="list" class="members"></div></section>
+</div></div></div>
+<script>
+const TOKEN="RANKONE-ADMIN-2026", $=s=>document.querySelector(s);
+$("#loginBtn").onclick=()=>{if($("#token").value===TOKEN){sessionStorage.rankoneAdmin="1";openApp()}else $("#loginMsg").textContent=" ✕ Token ไม่ถูกต้อง"};
+function openApp(){if(sessionStorage.rankoneAdmin!=="1")return;$("#login").classList.add("hidden");$("#app").classList.remove("hidden");load()}
+openApp();
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.classList.remove("active"));b.classList.add("active");["appearance","music","members"].forEach(id=>$("#"+id).classList.toggle("hidden",id!==b.dataset.tab))});
+function preview(v){$("#preview").style.backgroundImage=v?`url("${v}")`:"none"}
+function logoPreview(v){$("#logoPreview").style.backgroundImage=v?`url("${v}")`:"none"}
+let bg=localStorage.getItem("rankone_bg")||""; let logo=localStorage.getItem("rankone_logo")||"";
+$("#bgUrl").value=bg.startsWith("data:")?"":bg; preview(bg);
+$("#logoUrl").value=logo.startsWith("data:")?"":logo; logoPreview(logo);
+
+$("#bgFile").onchange=e=>{
+  const f=e.target.files[0]; if(!f)return;
+  if(f.size>4*1024*1024){alert("พื้นหลังต้องไม่เกิน 4MB");e.target.value="";return}
+  const r=new FileReader(); r.onload=()=>{bg=r.result;preview(bg)}; r.readAsDataURL(f);
+};
+$("#logoFile").onchange=e=>{
+  const f=e.target.files[0]; if(!f)return;
+  if(f.size>2*1024*1024){alert("โลโก้ต้องไม่เกิน 2MB");e.target.value="";return}
+  const r=new FileReader(); r.onload=()=>{logo=r.result;logoPreview(logo)}; r.readAsDataURL(f);
+};
+$("#bgUrl").oninput=e=>{bg=e.target.value.trim();preview(bg)};
+$("#logoUrl").oninput=e=>{logo=e.target.value.trim();logoPreview(logo)};
+$("#saveBg").onclick=()=>{
+  const v=bg||$("#bgUrl").value.trim();
+  if(!v){alert("เลือกไฟล์หรือใส่ URL ก่อน");return}
+  try{localStorage.setItem("rankone_bg",v);$("#bgMsg").textContent=" ✓ บันทึกแล้ว";setTimeout(()=>$("#bgMsg").textContent="",1800)}
+  catch(e){alert("ไฟล์ใหญ่เกินพื้นที่ Browser ให้ใช้ URL รูปแทน")}
+};
+$("#clearBg").onclick=()=>{localStorage.removeItem("rankone_bg");bg="";$("#bgUrl").value="";$("#bgFile").value="";preview("");$("#bgMsg").textContent=" ✓ รีเซ็ตแล้ว";setTimeout(()=>$("#bgMsg").textContent="",1800)};
+$("#saveLogo").onclick=()=>{
+  const v=logo||$("#logoUrl").value.trim();
+  if(!v){alert("เลือกโลโก้หรือใส่ URL ก่อน");return}
+  try{localStorage.setItem("rankone_logo",v);$("#logoMsg").textContent=" ✓ บันทึกแล้ว";setTimeout(()=>$("#logoMsg").textContent="",1800)}
+  catch(e){alert("ไฟล์ใหญ่เกินพื้นที่ Browser ให้ใช้ URL รูปแทน")}
+};
+$("#clearLogo").onclick=()=>{localStorage.removeItem("rankone_logo");logo="";$("#logoUrl").value="";$("#logoFile").value="";logoPreview("");$("#logoMsg").textContent=" ✓ รีเซ็ตแล้ว";setTimeout(()=>$("#logoMsg").textContent="",1800)};
+let yt=localStorage.getItem("rankone_youtube")||"";$("#ytUrl").value=yt;$("#saveMusic").onclick=()=>{let v=$("#ytUrl").value.trim();if(!/(youtube\.com|youtu\.be)/i.test(v)){alert("กรุณาใส่ลิงก์ YouTube");return}localStorage.setItem("rankone_youtube",v);$("#ytMsg").textContent=" ✓ SAVED";setTimeout(()=>$("#ytMsg").textContent="",1600)};
+let members=JSON.parse(localStorage.getItem("rankone_members")||"[]");
+function initials(n){return n.split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()}
+function list(){let l=$("#list");l.innerHTML=members.map((m,i)=>`<div class="member"><div class="ava">${m.image?`<img src="${m.image}">`:initials(m.name)}</div><div class="grow"><b>${m.name}</b><small>${m.role}</small></div><button onclick="del(${i})">DELETE</button></div>`).join("")}
+window.del=i=>{if(confirm("ลบสมาชิกนี้?")){members.splice(i,1);localStorage.setItem("rankone_members",JSON.stringify(members));list()}};
+$("#add").onclick=()=>{let name=$("#name").value.trim();if(!name)return alert("ใส่ชื่อก่อน");members.push({name,role:$("#role").value,facebook:$("#fb").value.trim()||"#",image:$("#img").value.trim()});localStorage.setItem("rankone_members",JSON.stringify(members));$("#name").value=$("#fb").value=$("#img").value="";$("#memberMsg").textContent=" ✓ SAVED";list();setTimeout(()=>$("#memberMsg").textContent="",1600)};
+list();
+</script></body></html>

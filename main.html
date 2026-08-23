@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GODFORGIVERANKONEDONT — RANKONE NEVERLOSER</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#080808;color:#eee;font-family:Kanit,sans-serif}
+body{overflow-x:hidden}.bg{position:fixed;inset:0;background:#111 center/cover no-repeat;z-index:-4;transition:background-image .5s}.bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#070707a8,#070707d8 55%,#070707f8)}
+.grid{position:fixed;inset:0;z-index:-3;opacity:.12;background-image:linear-gradient(#aaa 1px,transparent 1px),linear-gradient(90deg,#aaa 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(#000,transparent 75%)}
+.page{min-height:100vh}.landing{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:50px 20px}
+.hero{width:min(980px,94vw);text-align:center}.main-logo{width:92px;height:92px;margin:0 auto 24px;border:1px solid #555;border-radius:18px;background:#151515 center/cover no-repeat;display:grid;place-items:center;box-shadow:0 18px 55px #000;overflow:hidden;animation:up .7s ease}.main-logo span{font:800 28px Orbitron;color:#bbb}.main-logo img{width:100%;height:100%;object-fit:cover}.hero h1{font:800 clamp(34px,6.4vw,88px)/1 Orbitron;letter-spacing:3px;margin:0;text-shadow:0 5px 35px #000;animation:up .8s ease}.hero .sub{font:10px Orbitron;letter-spacing:7px;color:#777;margin:22px 0 34px;display:flex;justify-content:center;gap:18px;align-items:center}.sub i{display:block;width:45px;height:1px;background:#555}
+.entry{width:min(660px,92vw);margin:auto;border:1px solid #3a3a3a;border-radius:20px;background:#16161699;backdrop-filter:blur(12px);box-shadow:0 30px 100px #000;padding:48px 35px;animation:up 1s .1s both}
+.crown{font-size:35px;margin-bottom:10px}.entry h2{font:700 30px Orbitron;margin:0}.entry p{color:#777;margin:10px auto 28px;max-width:470px}.enter{border:1px solid #777;background:#eee;color:#090909;border-radius:4px;padding:15px 35px;font:700 11px Orbitron;letter-spacing:2px;cursor:pointer;transition:.25s}.enter:hover{background:#bbb;transform:translateY(-2px);box-shadow:0 12px 30px #000}
+.enter span{margin-left:12px}.bottom{position:fixed;left:30px;right:30px;bottom:22px;display:flex;justify-content:space-between;color:#555;font:8px Orbitron;letter-spacing:2px}.music{position:fixed;right:25px;top:22px;border:1px solid #333;background:#111a;color:#999;padding:10px 14px;border-radius:20px;font:8px Orbitron;cursor:pointer}
+.directory{display:none;max-width:1200px;margin:auto;padding:55px 24px 80px}.directory.show{display:block}.dir-head{text-align:center;margin-bottom:35px}.main-logo.small{width:64px;height:64px;margin-bottom:15px}.dir-head h1{font:800 clamp(32px,5vw,65px) Orbitron;margin:0}.dir-head p{font:9px Orbitron;color:#666;letter-spacing:5px}.tools{display:flex;gap:8px;justify-content:flex-end;margin-bottom:22px}.tools input,.tools select{background:#101010;color:#ddd;border:1px solid #303030;padding:12px;font-family:inherit}.tools input{width:260px}.sec{margin:40px 0}.sec-title{display:flex;align-items:baseline;gap:8px;margin-bottom:14px}.sec-title h2{font:700 25px Orbitron;margin:0}.sec-title small{color:#555;font:9px Orbitron}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.founders{grid-template-columns:repeat(2,1fr);max-width:780px;margin:auto}.card{position:relative;display:flex;align-items:center;gap:14px;min-height:96px;padding:14px 18px;border:1px solid #292929;border-radius:10px;background:linear-gradient(110deg,#181818,#0d0d0d);overflow:hidden;cursor:pointer;transition:.25s}.card:hover{transform:translateY(-3px);border-color:#666;box-shadow:0 18px 45px #000}.card:after{content:"";position:absolute;top:0;bottom:0;width:100px;background:linear-gradient(90deg,transparent,#fff1,transparent);transform:translateX(-150px) skewX(-20deg);transition:.7s}.card:hover:after{transform:translateX(500px) skewX(-20deg)}.avatar{width:52px;height:52px;min-width:52px;border-radius:50%;border:1px solid #555;background:#222;display:grid;place-items:center;overflow:hidden;font:700 12px Orbitron}.avatar img{width:100%;height:100%;object-fit:cover}.role{font:8px Orbitron;color:#777;letter-spacing:1px}.card h3{font-size:16px;font-weight:500;margin:5px 0}.fb{color:#777;text-decoration:none;font:8px Orbitron}.live{margin-left:auto;width:5px;height:5px;background:#aaa;border-radius:50%;box-shadow:0 0 12px #fff}.modal{display:none;position:fixed;inset:0;background:#000b;backdrop-filter:blur(8px);z-index:10;place-items:center}.modal.on{display:grid}.modalbox{width:min(420px,90vw);padding:35px;background:#111;border:1px solid #444;border-radius:15px;text-align:center;position:relative}.close{position:absolute;right:15px;top:7px;background:none;border:0;color:#888;font-size:26px}.modalbox .avatar{margin:auto;width:100px;height:100px}.modalbox h3{font:700 23px Orbitron}.modalbox a{display:block;background:#eee;color:#111;padding:12px;text-decoration:none;font:700 9px Orbitron}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}@media(max-width:800px){.cards,.founders{grid-template-columns:1fr}.tools{justify-content:stretch;flex-wrap:wrap}.tools input{flex:1;width:auto}.bottom{display:none}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div><div class="grid"></div>
+<button class="music" id="musicBtn">♫ MUSIC</button>
+
+<section class="landing" id="landing">
+  <div class="hero">
+    <div class="main-logo" id="mainLogo"><span>R</span></div>
+    <h1>GODFORGIVERANKONEDONT</h1>
+    <div class="sub"><i></i> RANKONE NEVERLOSER <i></i></div>
+    <div class="entry">
+      <div class="crown">♛</div>
+      <h2>RANKONE</h2>
+      <p>NEVER LOSE. NEVER FORGET.<br>WELCOME TO THE OFFICIAL MEMBER DIRECTORY.</p>
+      <button class="enter" id="enter">ENTER MEMBER DIRECTORY <span>↗</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="directory" id="directory">
+ <div class="dir-head"><div class="main-logo small" id="dirLogo"><span>R</span></div><h1>GODFORGIVERANKONEDONT</h1><p>RANKONE NEVERLOSER</p></div>
+ <div class="tools"><input id="search" placeholder="SEARCH MEMBERS..."><select id="filter"><option>ALL</option><option>Founder</option><option>Leader</option><option>Member</option></select></div>
+ <div class="sec"><div class="sec-title"><h2>FOUNDERS</h2><small>/ <b id="fc">00</b></small></div><div id="founders" class="cards founders"></div></div>
+ <div class="sec"><div class="sec-title"><h2>LEADERS</h2><small>/ <b id="lc">00</b></small></div><div id="leaders" class="cards"></div></div>
+ <div class="sec"><div class="sec-title"><h2>MEMBERS</h2><small>/ <b id="mc">00</b></small></div><div id="members" class="cards"></div></div>
+</section>
+<div class="bottom"><span>GODFORGIVERANKONEDONT</span><span>RANKONE NEVERLOSER</span><span>© 2026</span></div>
+<div class="modal" id="modal"><div class="modalbox"><button class="close" id="close">×</button><div id="mAvatar" class="avatar"></div><div id="mRole" class="role"></div><h3 id="mName"></h3><a id="mFb" target="_blank">OPEN FACEBOOK ↗</a></div></div>
+<div id="yt" style="position:fixed;left:-10000px;bottom:0;width:1px;height:1px"></div>
+<script>
+const defaults=[
+{name:"Thomas Winterfell",role:"Founder",facebook:"#",image:""},
+{name:"Paul Winterfell",role:"Founder",facebook:"#",image:""},
+{name:"Awake Prime",role:"Founder",facebook:"#",image:""},
+{name:"MeudMon Winterfell",role:"Founder",facebook:"#",image:""},
+{name:"JabGas Winterfell",role:"Founder",facebook:"#",image:""},
+{name:"Nelro Winterfell",role:"Leader",facebook:"#",image:""},
+{name:"Turk Godyouknow",role:"Leader",facebook:"#",image:""},
+{name:"Rankone Member 01",role:"Member",facebook:"#",image:""},
+{name:"Rankone Member 02",role:"Member",facebook:"#",image:""},
+{name:"Rankone Member 03",role:"Member",facebook:"#",image:""}];
+let members=JSON.parse(localStorage.getItem("rankone_members")||JSON.stringify(defaults));
+const $=s=>document.querySelector(s); const initial=n=>n.split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase();
+function applyBg(v){
+  const el=$("#bg");
+  if(!v){el.style.backgroundImage="none";el.style.backgroundColor="#111";return}
+  el.style.backgroundImage=`url("${v}")`;
+}
+function applyLogo(v){
+  ["#mainLogo","#dirLogo"].forEach(sel=>{
+    const el=$(sel); if(!el)return;
+    el.innerHTML=v?`<img src="${v}">`:`<span>R</span>`;
+  });
+}
+applyBg(localStorage.getItem("rankone_bg")||"");
+applyLogo(localStorage.getItem("rankone_logo")||"");
+function render(){let q=$("#search").value.toLowerCase(),f=$("#filter").value;let a=members.filter(x=>x.name.toLowerCase().includes(q)&&(f==="ALL"||x.role===f));let put=(id,r)=>$(id).innerHTML=a.filter(x=>x.role===r).map(x=>`<article class="card" data-n="${x.name}"><div class="avatar">${x.image?`<img src="${x.image}">`:initial(x.name)}</div><div><div class="role">${x.role.toUpperCase()}</div><h3>${x.name}</h3><a class="fb" href="${x.facebook}" target="_blank" onclick="event.stopPropagation()">Facebook</a></div><span class="live"></span></article>`).join("");put("#founders","Founder");put("#leaders","Leader");put("#members","Member");$("#fc").textContent=String(a.filter(x=>x.role==="Founder").length).padStart(2,"0");$("#lc").textContent=String(a.filter(x=>x.role==="Leader").length).padStart(2,"0");$("#mc").textContent=String(a.filter(x=>x.role==="Member").length).padStart(2,"0")}
+render();$("#search").oninput=render;$("#filter").onchange=render;
+$("#enter").onclick=()=>{$("#landing").style.display="none";$("#directory").classList.add("show");scrollTo(0,0)};
+document.addEventListener("click",e=>{let c=e.target.closest(".card");if(!c)return;let m=members.find(x=>x.name===c.dataset.n);$("#mRole").textContent=m.role.toUpperCase();$("#mName").textContent=m.name;$("#mFb").href=m.facebook;$("#mAvatar").innerHTML=m.image?`<img src="${m.image}">`:initial(m.name);$("#modal").classList.add("on")});
+$("#close").onclick=()=>$("#modal").classList.remove("on");$("#modal").onclick=e=>{if(e.target.id==="modal")$("#modal").classList.remove("on")};
+let yt=localStorage.getItem("rankone_youtube");let player;
+function ytId(url){let m=(url||"").match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([^?&/]+)/);return m?m[1]:""}
+function loadYT(){let id=ytId(yt);if(!id)return;$("#yt").innerHTML=`<iframe id="ytframe" width="1" height="1" src="https://www.youtube.com/embed/${id}?enablejsapi=1&loop=1&playlist=${id}&controls=0" allow="autoplay"></iframe>`}
+loadYT();$("#musicBtn").onclick=()=>{let f=$("#ytframe");if(!f){alert("ยังไม่ได้ตั้งเพลง YouTube ใน Admin");return}f.contentWindow.postMessage(JSON.stringify({event:"command",func:"playVideo",args:[]}),"*");$("#musicBtn").textContent="♫ PLAYING"};
+document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="a"){e.preventDefault();location.href="admin.html"}});
+</script>
+</body></html>
